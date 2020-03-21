@@ -2,16 +2,20 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import java.util.concurrent.TimeUnit;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.Select;
-import ru.stqa.pft.addressbook.ContactData;
+//import ru.stqa.pft.addressbook.SessionHelper;
+import ru.stqa.pft.addressbook.SessionHelper;
+import ru.stqa.pft.addressbook.tests.ContactData;
 
-public class ApplicationManager {
-    private WebDriver wd;
+
+public class ApplicationManager{
+    private NavigateHelper navigateHelper;
+    private GroupHelper groupHelper;
+    private SessionHelper sessionHelper;
+    WebDriver wd;
 
     public void init() {
         //Если наш driver firefox
@@ -23,36 +27,25 @@ public class ApplicationManager {
         wd = new ChromeDriver();
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
-        login("admin", "secret");
+        groupHelper = new GroupHelper(wd);
+        navigateHelper = new NavigateHelper(wd);
+        sessionHelper = new SessionHelper(wd);
+
+        sessionHelper.login("admin", "secret");
     }
 
-    private void login(String admin, String password) {
-        wd.findElement(By.name("user")).clear();
-        wd.findElement(By.name("user")).sendKeys(admin);
-        wd.findElement(By.name("pass")).click();
-        wd.findElement(By.name("pass")).clear();
-        wd.findElement(By.name("pass")).sendKeys(password);
-        wd.findElement(By.xpath("//input[@value='Login']")).click();
-    }
+
 
     public void submitContactGroup() {
-        wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+        groupHelper.submitContactGroup();
     }
 
-    protected void fillContactForm(ContactData contactData) {
-        wd.findElement(By.name("firstname")).click();
-        wd.findElement(By.name("firstname")).clear();
-        wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
-        wd.findElement(By.name("middlename")).click();
-        wd.findElement(By.name("middlename")).clear();
-        wd.findElement(By.name("middlename")).sendKeys(contactData.getMiddleName());
-        wd.findElement(By.name("lastname")).click();
-        wd.findElement(By.name("lastname")).clear();
-        wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
+    public void fillContactForm(ContactData contactData) {
+        groupHelper.fillContactForm(contactData);
     }
 
     public void gotoToContactPage() {
-        wd.findElement(By.linkText("add new")).click();
+        navigateHelper.gotoToContactPage();
     }
 
     public void stop() {
@@ -68,12 +61,5 @@ public class ApplicationManager {
         }
     }
 
-    public boolean isAlertPresent() {
-        try {
-            wd.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
-    }
+
 }
