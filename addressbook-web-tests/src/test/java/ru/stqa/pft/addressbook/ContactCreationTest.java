@@ -38,7 +38,8 @@ public class ContactCreationTest {
     @Test
     public void testContactCreation() throws Exception {
         gotoToContactPage();
-        fillContactForm("Olga", "Vladislavovna", "Brook" );
+        ContactData strData = new ContactData("Olga", "Vladislavovna", "Brook");
+        fillContactForm(strData);
         submitContactGroup();
     }
 
@@ -46,16 +47,16 @@ public class ContactCreationTest {
         wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
     }
 
-    private void fillContactForm(String firstname, String middlename, String lastname) {
+    private void fillContactForm(ContactData contactData) {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
-        wd.findElement(By.name("firstname")).sendKeys(firstname);
+        wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
         wd.findElement(By.name("middlename")).click();
         wd.findElement(By.name("middlename")).clear();
-        wd.findElement(By.name("middlename")).sendKeys(middlename);
+        wd.findElement(By.name("middlename")).sendKeys(contactData.getMiddleName());
         wd.findElement(By.name("lastname")).click();
         wd.findElement(By.name("lastname")).clear();
-        wd.findElement(By.name("lastname")).sendKeys(lastname);
+        wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
     }
 
     private void gotoToContactPage() {
