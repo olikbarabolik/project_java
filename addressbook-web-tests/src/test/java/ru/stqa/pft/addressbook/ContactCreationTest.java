@@ -22,29 +22,44 @@ public class ContactCreationTest {
         System.setProperty("webdriver.chrome.driver", "C://1806/2/3/chromedriver.exe");
         wd = new ChromeDriver();
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        wd.get("http://localhost/addressbook/");
+        login("admin", "secret");
+    }
+
+    private void login(String admin, String password) {
+        wd.findElement(By.name("user")).clear();
+        wd.findElement(By.name("user")).sendKeys(admin);
+        wd.findElement(By.name("pass")).click();
+        wd.findElement(By.name("pass")).clear();
+        wd.findElement(By.name("pass")).sendKeys(password);
+        wd.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
     @Test
     public void testContactCreation() throws Exception {
-        //System.out.println("ab");
-        wd.get("http://localhost/addressbook/");
-        wd.findElement(By.name("user")).clear();
-        wd.findElement(By.name("user")).sendKeys("admin");
-        wd.findElement(By.name("pass")).click();
-        wd.findElement(By.name("pass")).clear();
-        wd.findElement(By.name("pass")).sendKeys("secret");
-        wd.findElement(By.xpath("//input[@value='Login']")).click();
-        wd.findElement(By.linkText("add new")).click();
+        gotoToContactPage();
+        fillContactForm("Olga", "Vladislavovna", "Brook" );
+        submitContactGroup();
+    }
+
+    private void submitContactGroup() {
+        wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+    }
+
+    private void fillContactForm(String firstname, String middlename, String lastname) {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
-        wd.findElement(By.name("firstname")).sendKeys("Olga");
+        wd.findElement(By.name("firstname")).sendKeys(firstname);
         wd.findElement(By.name("middlename")).click();
         wd.findElement(By.name("middlename")).clear();
-        wd.findElement(By.name("middlename")).sendKeys("Vladislavovna");
+        wd.findElement(By.name("middlename")).sendKeys(middlename);
         wd.findElement(By.name("lastname")).click();
         wd.findElement(By.name("lastname")).clear();
-        wd.findElement(By.name("lastname")).sendKeys("Brook");
-        wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+        wd.findElement(By.name("lastname")).sendKeys(lastname);
+    }
+
+    private void gotoToContactPage() {
+        wd.findElement(By.linkText("add new")).click();
     }
 
     @AfterMethod(alwaysRun = true)
