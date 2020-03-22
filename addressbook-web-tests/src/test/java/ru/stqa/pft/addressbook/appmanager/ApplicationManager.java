@@ -8,8 +8,8 @@ import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.Select;
 //import ru.stqa.pft.addressbook.SessionHelper;
 import ru.stqa.pft.addressbook.SessionHelper;
-import ru.stqa.pft.addressbook.tests.ContactData;
-import ru.stqa.pft.addressbook.tests.GroupData;
+import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 
 public class ApplicationManager{

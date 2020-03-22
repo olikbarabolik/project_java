@@ -1,6 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import ru.stqa.pft.addressbook.tests.GroupData;
+import ru.stqa.pft.addressbook.model.GroupData;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.*;
