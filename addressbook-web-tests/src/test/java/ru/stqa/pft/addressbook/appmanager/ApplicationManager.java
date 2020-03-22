@@ -9,12 +9,15 @@ import org.openqa.selenium.support.ui.Select;
 //import ru.stqa.pft.addressbook.SessionHelper;
 import ru.stqa.pft.addressbook.SessionHelper;
 import ru.stqa.pft.addressbook.tests.ContactData;
+import ru.stqa.pft.addressbook.tests.GroupData;
 
 
 public class ApplicationManager{
     private NavigateHelper navigateHelper;
-    private GroupHelper groupHelper;
+    private ContactHelper contactHelper;
     private SessionHelper sessionHelper;
+    private GroupHelper groupHelper;
+
     WebDriver wd;
 
     public void init() {
@@ -27,9 +30,10 @@ public class ApplicationManager{
         wd = new ChromeDriver();
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
-        groupHelper = new GroupHelper(wd);
+        contactHelper = new ContactHelper(wd);
         navigateHelper = new NavigateHelper(wd);
         sessionHelper = new SessionHelper(wd);
+        groupHelper = new GroupHelper(wd);
 
         sessionHelper.login("admin", "secret");
     }
@@ -37,19 +41,38 @@ public class ApplicationManager{
 
 
     public void submitContactGroup() {
-        groupHelper.submitContactGroup();
+        contactHelper.submitContactGroup();
     }
 
+    public void submitGroupCreation() {
+        groupHelper.submitGroupCreation();
+    }
+
+    public void returnToGroupPage(){ navigateHelper.returnToGroupPage(); }
+
     public void fillContactForm(ContactData contactData) {
-        groupHelper.fillContactForm(contactData);
+        contactHelper.fillContactForm(contactData);
+    }
+
+    public void fillGroupForm(GroupData groupData) {
+        groupHelper.fillGroupForm(groupData);
     }
 
     public void gotoToContactPage() {
         navigateHelper.gotoToContactPage();
     }
 
-    public void stop() {
-        wd.quit();
+    public void gotoToGroupPage() {
+        navigateHelper.gotoToGroupPage();
+    }
+
+    public void initGroupCreation() {
+        groupHelper.initGroupCreation();
+    }
+
+
+        public void stop() {
+        //wd.quit();
     }
 
     public boolean isElementPresent(By by) {

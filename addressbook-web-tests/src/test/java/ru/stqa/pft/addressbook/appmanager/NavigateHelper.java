@@ -17,5 +17,16 @@ public class NavigateHelper extends HelperBase{
         //wd.findElement().click();
     }
 
+    public void gotoToGroupPage() {
+        click(By.linkText("groups"));
+        //wd.findElement().click();
+    }
+
+    public void returnToGroupPage(){
+        click(By.linkText("group page"));
+    }
+
+
+
 
 }

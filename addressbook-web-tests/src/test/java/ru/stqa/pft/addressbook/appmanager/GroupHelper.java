@@ -1,6 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import ru.stqa.pft.addressbook.tests.ContactData;
+import ru.stqa.pft.addressbook.tests.GroupData;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.*;
@@ -11,20 +11,23 @@ public class GroupHelper extends HelperBase {
     private WebDriver wd;
 
     public GroupHelper(WebDriver wd) {
-        //super.wd = wd;
         super(wd);
     }
 
-    public void submitContactGroup(){
-        click((By.xpath("(//input[@name='submit'])[2]")));
+    public void initGroupCreation() {
+        click(By.name("new"));
     }
 
+    public void fillGroupForm(GroupData groupData){
+        type(By.name("group_name"), groupData.getName());
+        type(By.name("group_header"), groupData.getHeader());
+        type(By.name("group_footer"), groupData.getFooter());
 
-    public void fillContactForm(ContactData contactData) {
-        type(By.name("firstname"), contactData.getFirstName());
-        type(By.name("middlename"), contactData.getMiddleName());
-        type(By.name("lastname"), contactData.getLastName());
+    }
 
+    public void submitGroupCreation(){
+
+            click(By.name("submit"));
     }
 
 
