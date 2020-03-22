@@ -58,6 +58,14 @@ public class ApplicationManager{
         groupHelper.fillGroupForm(groupData);
     }
 
+    public void selectGroup(){
+        groupHelper.selectGroup();
+    }
+
+    public void deleteSelectedGroups(){
+        groupHelper.deleteSelectedGroups();
+    }
+
     public void gotoToContactPage() {
         navigateHelper.gotoToContactPage();
     }

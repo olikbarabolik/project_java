@@ -30,5 +30,13 @@ public class GroupHelper extends HelperBase {
             click(By.name("submit"));
     }
 
+    public void selectGroup(){
+        click(By.name("selected[]"));
+    }
+
+    public void deleteSelectedGroups(){
+        click(By.name("delete"));
+    }
+
 
 }
