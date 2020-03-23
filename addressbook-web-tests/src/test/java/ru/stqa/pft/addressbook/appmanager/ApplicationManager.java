@@ -99,6 +99,10 @@ public class ApplicationManager{
         groupHelper.submitGroupModification();
     }
 
+    public void initContactModification(){
+        contactHelper.initContactModification();
+    }
+
     public boolean isElementPresent(By by) {
         try {
             wd.findElement(by);
