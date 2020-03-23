@@ -30,7 +30,10 @@ public class ContactHelper extends HelperBase {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("lastname"), contactData.getLastName());
-
+        type(By.name("address"), contactData.getAddress());
+        type(By.name("email"), contactData.getEmail());
+        type(By.name("email"), contactData.getEmail());
+        type(By.name("mobile"), contactData.getMobile());
     }
 
     public void deleteSelectedContact(){

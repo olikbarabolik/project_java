@@ -12,7 +12,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 
-public class ApplicationManager{
+public class ApplicationManager {
     private NavigateHelper navigateHelper;
     private ContactHelper contactHelper;
     private SessionHelper sessionHelper;
@@ -39,7 +39,6 @@ public class ApplicationManager{
     }
 
 
-
     public void submitContactGroup() {
         contactHelper.submitContactGroup();
     }
@@ -48,7 +47,9 @@ public class ApplicationManager{
         groupHelper.submitGroupCreation();
     }
 
-    public void returnToGroupPage(){ navigateHelper.returnToGroupPage(); }
+    public void returnToGroupPage() {
+        navigateHelper.returnToGroupPage();
+    }
 
     public void fillContactForm(ContactData contactData) {
         contactHelper.fillContactForm(contactData);
@@ -58,11 +59,11 @@ public class ApplicationManager{
         groupHelper.fillGroupForm(groupData);
     }
 
-    public void selectGroup(){
+    public void selectGroup() {
         groupHelper.selectGroup();
     }
 
-    public void deleteSelectedGroups(){
+    public void deleteSelectedGroups() {
         groupHelper.deleteSelectedGroups();
     }
 
@@ -78,39 +79,32 @@ public class ApplicationManager{
         groupHelper.initGroupCreation();
     }
 
-    public void deleteSelectedContact(){
+    public void deleteSelectedContact() {
         contactHelper.deleteSelectedContact();
     }
 
-    public void clickOK(){
+    public void clickOK() {
         contactHelper.clickOK(wd);
     }
 
 
-        public void stop() {
-        //wd.quit();
+    public void stop() {
+        wd.quit();
     }
 
-    public void initgroupModification(){
+    public void initgroupModification() {
         groupHelper.initgroupModification();
     }
 
-    public void submitGroupModification(){
+    public void submitGroupModification() {
         groupHelper.submitGroupModification();
     }
 
-    public void initContactModification(){
+    public void initContactModification() {
         contactHelper.initContactModification();
     }
 
-    public boolean isElementPresent(By by) {
-        try {
-            wd.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
+
 
 
 }

@@ -11,7 +11,7 @@ public class ContactCreationTest extends TestBase {
     @Test
     public void testContactCreation() throws Exception {
         app.gotoToContactPage();
-        ContactData strData = new ContactData("Olga", "Vladislavovna", "Brook");
+        ContactData strData = new ContactData("Olga", "Vladislavovna", "Brook", "The best street in the world", "mymail@gmail.com", "+79171233211");
         app.fillContactForm(strData);
         app.submitContactGroup();
     }
