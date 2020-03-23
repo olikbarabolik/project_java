@@ -6,6 +6,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.Select;
 
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.concurrent.TimeUnit;
+
+
+
 public class ContactHelper extends HelperBase {
 
     private WebDriver wd;
@@ -26,6 +32,16 @@ public class ContactHelper extends HelperBase {
         type(By.name("lastname"), contactData.getLastName());
 
     }
+
+    public void deleteSelectedContact(){
+        click(By.xpath("//input[@value='Delete']"));
+    }
+
+    public void clickOK(WebDriver wd){
+        wd.manage().timeouts().implicitlyWait(1300, TimeUnit.SECONDS);
+        wd.switchTo().alert().accept();
+    }
+
 
 
 }

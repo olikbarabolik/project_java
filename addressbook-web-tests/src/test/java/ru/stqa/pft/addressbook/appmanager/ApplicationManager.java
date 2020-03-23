@@ -78,9 +78,25 @@ public class ApplicationManager{
         groupHelper.initGroupCreation();
     }
 
+    public void deleteSelectedContact(){
+        contactHelper.deleteSelectedContact();
+    }
+
+    public void clickOK(){
+        contactHelper.clickOK(wd);
+    }
+
 
         public void stop() {
         //wd.quit();
+    }
+
+    public void initgroupModification(){
+        groupHelper.initgroupModification();
+    }
+
+    public void submitGroupModification(){
+        groupHelper.submitGroupModification();
     }
 
     public boolean isElementPresent(By by) {
