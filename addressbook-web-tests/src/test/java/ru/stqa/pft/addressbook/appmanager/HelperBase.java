@@ -33,5 +33,17 @@ public class HelperBase {
         }
     }
 
+    public void selectObject(){
+        click(By.name("selected[]"));
+    }
+
+    public void updateObject(){
+        click(By.name("update"));
+    }
+
+    public void clickOK(){
+        wd.switchTo().alert().accept();
+    }
+
 
 }

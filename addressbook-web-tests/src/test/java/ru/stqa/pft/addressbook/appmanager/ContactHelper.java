@@ -17,7 +17,6 @@ public class ContactHelper extends HelperBase {
     private WebDriver wd;
 
     public ContactHelper(WebDriver wd) {
-        //super.wd = wd;
         super(wd);
     }
 
@@ -40,9 +39,8 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//input[@value='Delete']"));
     }
 
-    public void clickOK(WebDriver wd){
-        wd.manage().timeouts().implicitlyWait(1300, TimeUnit.SECONDS);
-        wd.switchTo().alert().accept();
+    public void clickOK(){
+        super.clickOK();
     }
 
     public void initContactModification(){
@@ -50,6 +48,14 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//img[@alt='Edit']"));
     }
 
+    public void submitContactModification(){
+        //click(By.name("update"));
+        updateObject();
+    }
 
+    public void selectContact(){
+        selectObject();
+        //click(By.name("selected[]"));
+    }
 
 }

@@ -6,7 +6,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.Select;
-//import ru.stqa.pft.addressbook.SessionHelper;
+
 import ru.stqa.pft.addressbook.SessionHelper;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -34,77 +34,25 @@ public class ApplicationManager {
         navigateHelper = new NavigateHelper(wd);
         sessionHelper = new SessionHelper(wd);
         groupHelper = new GroupHelper(wd);
-
         sessionHelper.login("admin", "secret");
     }
 
 
-    public void submitContactGroup() {
-        contactHelper.submitContactGroup();
-    }
-
-    public void submitGroupCreation() {
-        groupHelper.submitGroupCreation();
-    }
-
-    public void returnToGroupPage() {
-        navigateHelper.returnToGroupPage();
-    }
-
-    public void fillContactForm(ContactData contactData) {
-        contactHelper.fillContactForm(contactData);
-    }
-
-    public void fillGroupForm(GroupData groupData) {
-        groupHelper.fillGroupForm(groupData);
-    }
-
-    public void selectGroup() {
-        groupHelper.selectGroup();
-    }
-
-    public void deleteSelectedGroups() {
-        groupHelper.deleteSelectedGroups();
-    }
-
-    public void gotoToContactPage() {
-        navigateHelper.gotoToContactPage();
-    }
-
-    public void gotoToGroupPage() {
-        navigateHelper.gotoToGroupPage();
-    }
-
-    public void initGroupCreation() {
-        groupHelper.initGroupCreation();
-    }
-
-    public void deleteSelectedContact() {
-        contactHelper.deleteSelectedContact();
-    }
-
-    public void clickOK() {
-        contactHelper.clickOK(wd);
-    }
-
-
     public void stop() {
-        wd.quit();
+        //wd.quit();
     }
 
-    public void initgroupModification() {
-        groupHelper.initgroupModification();
+    public GroupHelper getGroupHelper(){
+        return groupHelper;
     }
 
-    public void submitGroupModification() {
-        groupHelper.submitGroupModification();
+    public ContactHelper getContactHelper(){
+        return contactHelper;
     }
 
-    public void initContactModification() {
-        contactHelper.initContactModification();
+    public NavigateHelper getNavigateHelper(){
+        return navigateHelper;
     }
-
-
 
 
 }

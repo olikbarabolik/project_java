@@ -31,7 +31,8 @@ public class GroupHelper extends HelperBase {
     }
 
     public void selectGroup(){
-        click(By.name("selected[]"));
+        selectObject();
+        //click(By.name("selected[]"));
     }
 
     public void deleteSelectedGroups(){
@@ -43,7 +44,8 @@ public class GroupHelper extends HelperBase {
     }
 
     public void submitGroupModification(){
-        click(By.name("update"));
+        //click(By.name("update"));
+        updateObject();
     }
 
 
