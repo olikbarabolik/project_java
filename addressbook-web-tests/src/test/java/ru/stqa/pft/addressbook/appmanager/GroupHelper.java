@@ -48,5 +48,24 @@ public class GroupHelper extends HelperBase {
         updateObject();
     }
 
+    public void returnToGroupPage(){
+        click(By.linkText("group page"));
+    }
+
+
+    public void createGroup(GroupData groupData){
+        System.out.println("1111");
+
+        initGroupCreation();
+        fillGroupForm(groupData);
+        submitGroupCreation();
+        returnToGroupPage();
+
+    }
+
+    public boolean isThereAGroup(){
+        return isElementPresent(By.name("selected[]"));
+    }
+
 
 }

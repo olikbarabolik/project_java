@@ -6,6 +6,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.NoSuchElementException;
+
+//import sun.plugin2.util.*;
+
 public class HelperBase {
 
     protected WebDriver wd;
@@ -44,6 +48,18 @@ public class HelperBase {
     public void clickOK(){
         wd.switchTo().alert().accept();
     }
+
+    public boolean isElementPresent(By locator){
+        System.out.println("!!!!!!!isElementPresent" + wd);
+        System.out.println("!!!!!!!locator" + locator);
+        /*try{  System.out.println("!!!!!!!1" + locator);
+            wd.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex){System.out.println("!!!!!!!2" + locator);
+            return false;
+        }*/ return false;
+    }
+
 
 
 }
