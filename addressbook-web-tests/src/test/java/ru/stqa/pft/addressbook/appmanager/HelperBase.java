@@ -52,12 +52,12 @@ public class HelperBase {
     public boolean isElementPresent(By locator){
         System.out.println("!!!!!!!isElementPresent" + wd);
         System.out.println("!!!!!!!locator" + locator);
-        /*try{  System.out.println("!!!!!!!1" + locator);
+        try{  System.out.println("!!!!!!!1" + locator);
             wd.findElement(locator);
             return true;
         } catch (NoSuchElementException ex){System.out.println("!!!!!!!2" + locator);
             return false;
-        }*/ return false;
+        } /*return false;*/
     }
 
 
