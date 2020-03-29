@@ -5,10 +5,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.remote.BrowserType;
 
-import java.util.NoSuchElementException;
+import org.openqa.selenium.NoSuchElementException;
 
-//import sun.plugin2.util.*;
 
 public class HelperBase {
 
@@ -50,12 +50,10 @@ public class HelperBase {
     }
 
     public boolean isElementPresent(By locator){
-        System.out.println("!!!!!!!isElementPresent" + wd);
-        System.out.println("!!!!!!!locator" + locator);
-        try{  System.out.println("!!!!!!!1" + locator);
+        try{
             wd.findElement(locator);
             return true;
-        } catch (NoSuchElementException ex){System.out.println("!!!!!!!2" + locator);
+        } catch (NoSuchElementException ex){
             return false;
         } /*return false;*/
     }

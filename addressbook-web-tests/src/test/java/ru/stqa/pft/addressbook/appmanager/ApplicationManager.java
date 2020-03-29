@@ -6,13 +6,13 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.Select;
-
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.ie.*;
 
 import ru.stqa.pft.addressbook.SessionHelper;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
-//import sun.plugin2.util.*;
-//import sun.plugin2.util.BrowserType;
+
 
 
 public class ApplicationManager {
@@ -24,30 +24,30 @@ public class ApplicationManager {
 
     WebDriver wd;
 
-    /*public ApplicationManager(String browser){
+    public ApplicationManager(String browser){
         this.browser = browser;
-    }*/
+    }
 
     public void init() {
         //Проверка браузера
-        /*if (browser.equals(BrowserType.FIREFOX)){
+        if (browser.equals(BrowserType.FIREFOX)){
             System.setProperty("webdriver.gecko.driver", "C://1806/2/geckodriver.exe");
             wd = new FirefoxDriver();
         } else if (browser.equals(BrowserType.CHROME)){
             System.setProperty("webdriver.chrome.driver", "C://1806/2/3/chromedriver.exe");
             wd = new ChromeDriver();
         } else if (browser.equals(BrowserType.IE)){
-            wd = new InternetExplorerDriver();
-        }*/
+            System.setProperty("webdriver.ie.driver", "C://1806/2/3/IEDriverServer.exe");
+            wd = new InternetExplorerDriver();;
+        }
 
         //Если наш driver firefox
         //System.setProperty("webdriver.firefox.driver", "C://1806/2/geckodriver.exe");
         //driver = new FirefoxDriver();
 
         //Если наш driver chrome
-        System.setProperty("webdriver.chrome.driver", "C://1806/2/3/chromedriver.exe");
-        //System.setProperty("webdriver.chrome.driver", "C://1806/2/chromedriver.exe");
-        wd = new ChromeDriver();
+        /*System.setProperty("webdriver.chrome.driver", "C://1806/2/3/chromedriver.exe");
+        wd = new ChromeDriver();*/
         wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
         contactHelper = new ContactHelper(wd);
