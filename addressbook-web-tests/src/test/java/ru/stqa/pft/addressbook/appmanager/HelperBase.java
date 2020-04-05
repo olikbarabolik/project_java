@@ -67,8 +67,10 @@ public class HelperBase {
         List<GroupData> groups = new ArrayList<GroupData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements){
+
             String name = element.getText();
-            GroupData group = new GroupData(name, null, null);
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            GroupData group = new GroupData(id, name, null, null);
             groups.add(group);
         }
         return groups;
@@ -97,9 +99,11 @@ public class HelperBase {
         for (WebElement element : elements){//перебор строки
              List<WebElement>  cells = element.findElements(By.cssSelector("td.center + td + td")); //перебор столбцов внутри
                 for (WebElement cells2 : cells) {
+                    int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
                     String firstname = cells2.getText();
                     if ((firstname.length()>0)){//значение непустое
-                        ContactData contact = new ContactData(firstname, null, null, null, null, null);
+
+                        ContactData contact = new ContactData(id, firstname, null, null, null, null, null);
                         contacts.add(contact);
                     }
                 }
