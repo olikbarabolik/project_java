@@ -9,6 +9,8 @@ import org.openqa.selenium.chrome.*;
 
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.support.ui.Select;
@@ -40,15 +42,6 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    // перенести его на уровень выше
-    /*public boolean isElementPresent(By locator){
-        try{
-            wd.findElement(locator);
-            return true;
-        } catch (NoSuchElementException ex){
-            return false;
-        }
-    }*/
 
     public void deleteSelectedContact(){
         click(By.xpath("//input[@value='Delete']"));
@@ -66,13 +59,14 @@ public class ContactHelper extends HelperBase {
     public void submitContactModification(){
         //click(By.name("update"));
         updateObject();
+        returnToContactPage();
     }
 
-    public void selectContact(){
-        selectObject();
-        //click(By.name("selected[]"));
-    }
+    public void selectContact(int index){
+        super.selectContact(index);
+        //selectObject();
 
+    }
 
     public void createContact(ContactData contactData){
         System.out.println("2222");
@@ -95,4 +89,13 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = super.getContactList();
+        return contacts;
+    }
+
+    public int getContactCount(){
+        return super.getContactCount();
+
+    }
 }

@@ -8,6 +8,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.remote.BrowserType;
 
 import org.openqa.selenium.NoSuchElementException;
+import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HelperBase {
@@ -55,9 +60,51 @@ public class HelperBase {
             return true;
         } catch (NoSuchElementException ex){
             return false;
-        } /*return false;*/
+        }
+    }
+
+    public List<GroupData> getGroupList(){
+        List<GroupData> groups = new ArrayList<GroupData>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+        for (WebElement element : elements){
+            String name = element.getText();
+            GroupData group = new GroupData(name, null, null);
+            groups.add(group);
+        }
+        return groups;
+    }
+
+    public int getGroupCount(){
+       return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public int getContactCount(){
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public void selectGroup(int index){
+        wd.findElements(By.name("selected[]")).get(index).click();
+    }
+
+    public void selectContact(int index){
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
 
+    protected List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        for (WebElement element : elements){//перебор строки
+             List<WebElement>  cells = element.findElements(By.cssSelector("td.center + td + td")); //перебор столбцов внутри
+                for (WebElement cells2 : cells) {
+                    String firstname = cells2.getText();
+                    if ((firstname.length()>0)){//значение непустое
+                        ContactData contact = new ContactData(firstname, null, null, null, null, null);
+                        contacts.add(contact);
+                    }
+                }
+        }
+        return contacts;
+    }
 
 }

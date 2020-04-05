@@ -6,6 +6,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GroupHelper extends HelperBase {
 
     private WebDriver wd;
@@ -30,9 +33,10 @@ public class GroupHelper extends HelperBase {
             click(By.name("submit"));
     }
 
-    public void selectGroup(){
-        selectObject();
-        //click(By.name("selected[]"));
+    public void selectGroup(int index){
+        super.selectGroup(index);
+        //selectObject();
+
     }
 
     public void deleteSelectedGroups(){
@@ -44,7 +48,6 @@ public class GroupHelper extends HelperBase {
     }
 
     public void submitGroupModification(){
-        //click(By.name("update"));
         updateObject();
     }
 
@@ -54,8 +57,6 @@ public class GroupHelper extends HelperBase {
 
 
     public void createGroup(GroupData groupData){
-        System.out.println("1111");
-
         initGroupCreation();
         fillGroupForm(groupData);
         submitGroupCreation();
@@ -65,6 +66,16 @@ public class GroupHelper extends HelperBase {
 
     public boolean isThereAGroup(){
         return isElementPresent(By.name("selected[]"));
+    }
+
+    public List<GroupData> getGroupList(){
+        List<GroupData> groups = super.getGroupList();
+        return groups;
+    }
+
+    public int getGroupCount(){
+       return super.getGroupCount();
+
     }
 
 
