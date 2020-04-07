@@ -97,16 +97,12 @@ public class HelperBase {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements){//перебор строки
-             List<WebElement>  cells = element.findElements(By.cssSelector("td.center + td + td")); //перебор столбцов внутри
-                for (WebElement cells2 : cells) {
+            List<WebElement>  cells = element.findElements(By.cssSelector("td"));
                     int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-                    String firstname = cells2.getText();
-                    if ((firstname.length()>0)){//значение непустое
-
-                        ContactData contact = new ContactData(id, firstname, null, null, null, null, null);
-                        contacts.add(contact);
-                    }
-                }
+                    String firstname = cells.get(2).getText();
+                    String lastname = cells.get(1).getText();
+                    ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null);
+                    contacts.add(contact);
         }
         return contacts;
     }

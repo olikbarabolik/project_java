@@ -47,12 +47,13 @@ public class ContactData {
         if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
         return id == that.id &&
-                Objects.equals(firstname, that.firstname);
+                Objects.equals(firstname, that.firstname) &&
+                Objects.equals(lastname, that.lastname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname);
+        return Objects.hash(id, firstname, lastname);
     }
 
     public int getId (){
