@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -51,21 +52,17 @@ public class ContactHelper extends HelperBase {
         super.clickOK();
     }
 
-    public void initContactModification(){
-
-        click(By.xpath("//img[@alt='Edit']"));
+    public void initContactModification(int index){
+        click(By.xpath("//a[@href='edit.php?id="+ index +"']"));
     }
 
     public void submitContactModification(){
-        //click(By.name("update"));
         updateObject();
         returnToContactPage();
     }
 
     public void selectContact(int index){
         super.selectContact(index);
-        //selectObject();
-
     }
 
     public void createContact(ContactData contactData){
@@ -90,7 +87,16 @@ public class ContactHelper extends HelperBase {
     }
 
     public List<ContactData> getContactList() {
-        List<ContactData> contacts = super.getContactList();
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = super.wd.findElements(By.name("entry"));
+        for (WebElement element : elements){//перебор строки
+            List<WebElement>  cells = element.findElements(By.cssSelector("td"));
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            String firstname = cells.get(2).getText();
+            String lastname = cells.get(1).getText();
+            ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null);
+            contacts.add(contact);
+        }
         return contacts;
     }
 

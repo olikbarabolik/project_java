@@ -63,18 +63,6 @@ public class HelperBase {
         }
     }
 
-    public List<GroupData> getGroupList(){
-        List<GroupData> groups = new ArrayList<GroupData>();
-        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-        for (WebElement element : elements){
-
-            String name = element.getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            GroupData group = new GroupData(id, name, null, null);
-            groups.add(group);
-        }
-        return groups;
-    }
 
     public int getGroupCount(){
        return wd.findElements(By.name("selected[]")).size();
@@ -93,18 +81,6 @@ public class HelperBase {
     }
 
 
-    protected List<ContactData> getContactList() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> elements = wd.findElements(By.name("entry"));
-        for (WebElement element : elements){//перебор строки
-            List<WebElement>  cells = element.findElements(By.cssSelector("td"));
-                    int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-                    String firstname = cells.get(2).getText();
-                    String lastname = cells.get(1).getText();
-                    ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null);
-                    contacts.add(contact);
-        }
-        return contacts;
-    }
+
 
 }
