@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ContactModification extends TestBase{
 
-    @Test
+    @Test(enabled = false)
     public void testContactModification(){
         //Модификация имени, отчества и мобильного
         if (!app.getContactHelper().isThereAContact()){

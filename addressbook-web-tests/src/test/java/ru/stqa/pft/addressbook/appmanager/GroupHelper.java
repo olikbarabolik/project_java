@@ -39,6 +39,12 @@ public class GroupHelper extends HelperBase {
 
     }
 
+    public void delete(int index){
+        selectGroup(index);
+        deleteSelectedGroups();
+        returnToGroupPage();
+    }
+
     public void deleteSelectedGroups(){
         click(By.name("delete"));
     }
@@ -56,12 +62,19 @@ public class GroupHelper extends HelperBase {
     }
 
 
-    public void createGroup(GroupData groupData){
+    public void create(GroupData groupData){
         initGroupCreation();
         fillGroupForm(groupData);
         submitGroupCreation();
         returnToGroupPage();
+    }
 
+    public void modify(int index, GroupData group){
+        selectGroup(index);
+        initgroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
+        returnToGroupPage();
     }
 
     public boolean isThereAGroup(){
@@ -73,7 +86,7 @@ public class GroupHelper extends HelperBase {
 
     }
 
-    public List<GroupData> getGroupList(){
+    public List<GroupData> list(){
         List<GroupData> groups = new ArrayList<GroupData>();
         List<WebElement> elements = super.wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements){
