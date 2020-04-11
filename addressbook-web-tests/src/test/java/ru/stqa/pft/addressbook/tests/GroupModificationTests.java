@@ -40,7 +40,7 @@ public class GroupModificationTests extends TestBase{
         //before.remove(modifiedGroup);
         //before.add(group);
 
-        assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
+        assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group))); 
 
 
     }
