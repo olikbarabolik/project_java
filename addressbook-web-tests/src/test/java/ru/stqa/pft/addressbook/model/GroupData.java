@@ -9,7 +9,8 @@ public class GroupData {
     private String header;
     private String footer;
 
-    public GroupData (String name, String header, String footer){
+
+    /*public GroupData (String name, String header, String footer){
         this.id = 0;
         this.name = name;
         this.header = header;
@@ -21,7 +22,7 @@ public class GroupData {
         this.name = name;
         this.header = header;
         this.footer = footer;
-    }
+    }*/
 
     public String getName(){
         return name;
@@ -36,8 +37,24 @@ public class GroupData {
         return id;
     }
 
-    public void setId(int id){
+    public GroupData withId(int id){
         this.id = id;
+        return this;
+    }
+
+    public GroupData withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public GroupData withHeader(String header) {
+        this.header = header;
+        return this;
+    }
+
+    public GroupData withFooter(String footer) {
+        this.footer = footer;
+        return this;
     }
 
     @Override
