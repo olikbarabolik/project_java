@@ -6,32 +6,12 @@ public class ContactData {
 
     private int id;
     private String firstname;
-    private String middlename;
     private String lastname;
+
+    private String middlename;
     private String address;
     private String email;
     private String mobile;
-    private String group;
-
-    public ContactData (String firstname, String middlename, String lastname, String address, String email, String mobile){
-        this.id = 0;
-        this.firstname = firstname;
-        this.middlename = middlename;
-        this.lastname = lastname;
-        this.address = address;
-        this.email = email;
-        this.mobile = mobile;
-    }
-
-    public ContactData (int id, String firstname, String middlename, String lastname, String address, String email, String mobile){
-        this.id = id;
-        this.firstname = firstname;
-        this.middlename = middlename;
-        this.lastname = lastname;
-        this.address = address;
-        this.email = email;
-        this.mobile = mobile;
-    }
 
     @Override
     public String toString() {
@@ -75,11 +55,43 @@ public class ContactData {
         return email;
     }
     public String getMobile(){ return mobile;}
-    public String getGroup(){ return group;}
 
-    public void setId(int id){
+    public ContactData withId(int id){
         this.id = id;
+        return this;
     }
+
+    public ContactData withName(String firstname) {
+        this.firstname = firstname;
+        return this;
+    }
+
+    public ContactData withLastName(String lastname) {
+        this.lastname = lastname;
+        return this;
+    }
+
+    public ContactData withMiddlename(String middlename) {
+        this.middlename = middlename;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactData withMobile(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+
 
 }
 

@@ -16,7 +16,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 public class ContactHelper extends HelperBase {
 
@@ -65,14 +67,31 @@ public class ContactHelper extends HelperBase {
         super.selectContact(index);
     }
 
-    public void createContact(ContactData contactData){
-        System.out.println("2222");
+    public void create(ContactData contactData){
         gotoToContactPage();
         fillContactForm(contactData);
         submitContactGroup();
         returnToContactPage();
 
     }
+
+    public void modify(ContactData contactData){
+        initContactModification(contactData.getId());
+        fillContactForm(contactData);
+        submitContactModification();
+    }
+
+    public ContactData delete (ContactData contact){
+        selectContactById(contact.getId());
+        deleteSelectedContact();
+        clickOK();
+        return contact;
+    }
+
+    private void selectContactById(int id) {
+        super.wd.findElement(By.cssSelector("input[value='" + id +"']")).click();
+    }
+
 
     public void gotoToContactPage() {
         click(By.linkText("add new"));
@@ -86,15 +105,16 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public List<ContactData> getContactList() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
+    public Contacts all(){
+        Contacts contacts = new Contacts();
         List<WebElement> elements = super.wd.findElements(By.name("entry"));
         for (WebElement element : elements){//перебор строки
             List<WebElement>  cells = element.findElements(By.cssSelector("td"));
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             String firstname = cells.get(2).getText();
             String lastname = cells.get(1).getText();
-            ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null);
+            //ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null);
+            ContactData contact = new ContactData().withId(id).withName(firstname).withLastName(lastname);
             contacts.add(contact);
         }
         return contacts;
