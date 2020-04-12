@@ -24,7 +24,6 @@ public class ContactModification extends TestBase{
 
     @Test(enabled = false)
     public void testContactModification(){
-        //Модификация имени, отчества и мобильного
 
         Contacts before = app.contact().all();
         ContactData modifiedContact = before.iterator().next();
@@ -34,9 +33,9 @@ public class ContactModification extends TestBase{
                 app.contact().fillContactForm(contact);
 
         app.contact().modify(contact);
-        //assertEquals(app.group().count(), before.size());
+        assertEquals(app.contact().count(), before.size());
         Contacts after = app.contact().all();
-        assertEquals(after.size(), before.size());
+
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
 
     }

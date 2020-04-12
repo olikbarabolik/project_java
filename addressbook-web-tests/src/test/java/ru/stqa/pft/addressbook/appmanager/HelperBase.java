@@ -64,11 +64,11 @@ public class HelperBase {
     }
 
 
-    public int count(){
+    /*public int count(){
        return wd.findElements(By.name("selected[]")).size();
-    }
+    }*/
 
-    public int getContactCount(){
+    public int count(){
         return wd.findElements(By.name("selected[]")).size();
     }
 

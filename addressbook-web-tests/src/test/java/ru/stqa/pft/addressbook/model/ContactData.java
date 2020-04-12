@@ -17,6 +17,12 @@ public class ContactData {
     private String workPhone;
 
     private String allPhones;
+    private String allEmail;
+
+    private String email2;
+    private String email3;
+
+
 
     @Override
     public String toString() {
@@ -60,6 +66,37 @@ public class ContactData {
         return email;
     }
     public String getMobilePhone(){ return mobilePhone;}
+    public String getEmail2() {  return email2;   }
+    public String getEmail3() { return email3;  }
+    public String getAllEmail() { return allEmail;  }
+    public String getAllPhones() {  return allPhones;    }
+    public String getHomePhone() {  return homePhone;   }
+    public String getWorkPhone() {  return workPhone;    }
+
+
+    /* email */
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactData withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public ContactData withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
+    public ContactData withAllEmail(String allEmail) {
+        this.allEmail = allEmail;
+        return this;
+    }
+
+    /*ид, имена*/
 
     public ContactData withId(int id){
         this.id = id;
@@ -81,23 +118,18 @@ public class ContactData {
         return this;
     }
 
+    /* Адреса */
+
     public ContactData withAddress(String address) {
         this.address = address;
         return this;
     }
 
-    public ContactData withEmail(String email) {
-        this.email = email;
-        return this;
-    }
+    /* Мобильные */
 
     public ContactData withMobile(String mobile) {
         this.mobilePhone = mobile;
         return this;
-    }
-
-    public String getAllPhones() {
-        return allPhones;
     }
 
     public ContactData withAllPhones(String allPhones) {
@@ -105,17 +137,9 @@ public class ContactData {
         return this;
     }
 
-    public String getHomePhone() {
-        return homePhone;
-    }
-
     public ContactData withHomePhone(String homePhone) {
         this.homePhone = homePhone;
         return this;
-    }
-
-    public String getWorkPhone() {
-        return workPhone;
     }
 
     public ContactData withWorkPhone(String workPhone) {
