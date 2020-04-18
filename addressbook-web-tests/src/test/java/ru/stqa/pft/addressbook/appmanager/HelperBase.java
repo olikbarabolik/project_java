@@ -14,6 +14,11 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+
 
 public class HelperBase {
 
@@ -27,6 +32,12 @@ public class HelperBase {
         wd.findElement(locator).click();
         wd.findElement(locator).clear();
         wd.findElement(locator).sendKeys(text);
+    }
+
+    protected void attach(By locator, File file){
+        if (file!=null){
+            wd.findElement(locator).sendKeys(file.getAbsolutePath());
+        }
     }
 
     public void click(By locator){

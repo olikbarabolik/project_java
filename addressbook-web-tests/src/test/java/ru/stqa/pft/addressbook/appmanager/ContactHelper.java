@@ -29,7 +29,6 @@ public class ContactHelper extends HelperBase {
 
 
     public void fillContactForm(ContactData contactData) {
-        System.out.println("!!!!! contactData" + contactData.getFirstName());
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("lastname"), contactData.getLastName());
@@ -77,6 +76,8 @@ public class ContactHelper extends HelperBase {
         contactCache= null;
         submitContactModification();
     }
+
+
 
     public ContactData delete (ContactData contact){
         selectContactById(contact.getId());
