@@ -56,14 +56,16 @@ public class GroupCreationTest extends TestBase{
         BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/java/ru/stqa/pft/addressbook/tests/resources/groups.xml")));
         String xml = "";
         String line = reader.readLine();
-        while (line != null){
-            xml+=line;
+        while (line != null) {
+            xml += line;
             line = reader.readLine();
         }
         XStream xstream = new XStream();
+        xstream.alias("group",GroupData.class);
         xstream.processAnnotations(GroupData.class);
         List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
-        return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+        return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+
     }
 
     @DataProvider
