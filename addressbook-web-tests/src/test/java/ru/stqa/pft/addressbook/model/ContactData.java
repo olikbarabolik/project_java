@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -32,6 +33,7 @@ public class ContactData {
     private String email2;
     private String email3;
 
+    private File photo;
 
 
     @Override
@@ -82,7 +84,14 @@ public class ContactData {
     public String getAllPhones() {  return allPhones;    }
     public String getHomePhone() {  return homePhone;   }
     public String getWorkPhone() {  return workPhone;    }
+    public File getPhoto() { return photo;  }
 
+    /*photo*/
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
 
     /* email */
 

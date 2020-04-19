@@ -1,5 +1,10 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 
@@ -18,6 +23,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 
 
 public class ApplicationManager {
+    private final Properties properties;
     private NavigateHelper navigateHelper;
     private ContactHelper contactHelper;
     private SessionHelper sessionHelper;
@@ -26,11 +32,15 @@ public class ApplicationManager {
 
     WebDriver wd;
 
-    public ApplicationManager(String browser){
+    public ApplicationManager(String browser) {
         this.browser = browser;
+        properties = new Properties();
+
     }
 
-    public void init() {
+    public void init() throws IOException {
+        String target = System.getProperty("target","local");
+        properties.load(new FileReader(new File(String.format("src/test/java/ru/stqa/pft/addressbook/tests/resources/%s.properties", target))));
         //Проверка браузера
         if (browser.equals(BrowserType.FIREFOX)){
             System.setProperty("webdriver.gecko.driver", "C://1806/2/geckodriver.exe");
@@ -44,12 +54,13 @@ public class ApplicationManager {
         }
 
         wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        wd.get("http://localhost/addressbook/");
+        //wd.get("http://localhost/addressbook/");
+        wd.get(properties.getProperty("web.baseUrl"));
         contactHelper = new ContactHelper(wd);
         navigateHelper = new NavigateHelper(wd);
         sessionHelper = new SessionHelper(wd);
         groupHelper = new GroupHelper(wd);
-        sessionHelper.login("admin", "secret");
+        sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
 
     }
 

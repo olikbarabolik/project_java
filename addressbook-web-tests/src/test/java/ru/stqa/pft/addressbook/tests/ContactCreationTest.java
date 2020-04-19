@@ -45,11 +45,10 @@ public class ContactCreationTest extends TestBase {
 
     @Test(dataProvider = "validContactFromJSON")
     public void testContactCreation(ContactData contact) throws Exception {
+        File photo = new File("src/test/java/ru/stqa/pft/addressbook/tests/resources/stru.png");
         Contacts before = app.contact().all();
         app.contact().gotoToContactPage();
-        /*ContactData contact = new ContactData().withLastName("Brook").withName("Olga").withMiddlename("Vladislavovna").withAddress("The best street in the world")
-                .withEmail("mymail@gmail.com").withMobile("79171233211");*/
-                app.contact().create(contact);
+        app.contact().create(contact);
         assertThat(app.contact().count(), equalTo(before.size()+1));
         Contacts after = app.contact().all();
         assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
