@@ -13,8 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.GenerationType;
+import javax.persistence.*;
 
-
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table (name = "group_list")
@@ -26,16 +28,17 @@ public class GroupData {
     private int id;
 
     @Expose
-    @Column (name="group_name")
+    @Column(name="group_name")
     private String name;
 
     @Expose
-    @Column (name="group_header")
+    @Column(name="group_header")
+    @Type(type = "text")
     private String header;
 
     @Expose
-    @Column (name="group_footer")
-    //@Type(type = "text")
+    @Column(name="group_footer")
+    @Type(type = "text")
     private String footer;
 
     public String getName(){
