@@ -1,21 +1,41 @@
 package ru.stqa.pft.addressbook.model;
 
 import java.util.Objects;
+
+import com.sun.javafx.beans.IDProperty;
 import com.thoughtworks.xstream.XStream;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+
+
+
+@Entity
+@Table (name = "group_list")
 public class GroupData {
 
     @XStreamOmitField
+    @Id
+    @Column(name = "group_id")
     private int id;
+
     @Expose
+    @Column (name="group_name")
     private String name;
+
     @Expose
+    @Column (name="group_header")
     private String header;
+
     @Expose
+    @Column (name="group_footer")
+    //@Type(type = "text")
     private String footer;
 
     public String getName(){
