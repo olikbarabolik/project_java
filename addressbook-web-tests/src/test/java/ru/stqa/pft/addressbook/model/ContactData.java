@@ -1,39 +1,76 @@
 package ru.stqa.pft.addressbook.model;
 
+import java.beans.Transient;
+
+
+import java.io.Serializable;
 import java.io.File;
 import java.util.Objects;
 
+import com.sun.javafx.beans.IDProperty;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.GenerationType;
+import javax.persistence.*;
+
+import org.hibernate.annotations.Type;
+
+@Entity
+@Table(name="addressbook")
 public class ContactData {
 
+    @Id
+    @Column(name="id")
     private int id;
+
     @Expose
+    @Column(name="firstname")
     private String firstname;
+
     @Expose
+    @Column(name="lastname")
     private String lastname;
 
     @Expose
-    private String middlename;
+    transient private String middlename;
+
     @Expose
-    private String address;
+    transient private String address;
     @Expose
-    private String email;
+    transient private String email;
+
+    //@Transient
+    transient private String group;
+
     @Expose
+    @Column(name="mobile")
+    @Type(type = "text")
     private String mobilePhone;
 
+    @Column(name="home")
+    @Type(type = "text")
     private String homePhone;
+
+    @Column(name="work")
+    @Type(type = "text")
     private String workPhone;
 
-    private String allPhones;
-    private String allEmail;
+    //@Transient
+    transient private String allPhones;
+    transient  private String allEmail;
 
-    private String email2;
-    private String email3;
+    transient private String email2;
+    transient private String email3;
 
-    private File photo;
+    @Column(name="photo")
+    @Type(type = "text")
+    private String photo;
 
 
     @Override
@@ -84,12 +121,12 @@ public class ContactData {
     public String getAllPhones() {  return allPhones;    }
     public String getHomePhone() {  return homePhone;   }
     public String getWorkPhone() {  return workPhone;    }
-    public File getPhoto() { return photo;  }
+    public File getPhoto() { return new File(photo);  }
 
     /*photo*/
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
