@@ -5,7 +5,9 @@ import java.beans.Transient;
 
 import java.io.Serializable;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.sun.javafx.beans.IDProperty;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -20,6 +22,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
+import javax.persistence.ManyToMany;
 
 @Entity
 @Table(name="addressbook")
@@ -46,7 +49,7 @@ public class ContactData {
     transient private String email;
 
     //@Transient
-    transient private String group;
+    //transient private String group;
 
     @Expose
     @Column(name="mobile")
@@ -60,6 +63,20 @@ public class ContactData {
     @Column(name="work")
     @Type(type = "text")
     private String workPhone;
+
+    @ManyToMany
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name="id"), inverseJoinColumns = @JoinColumn(name="group_id"))
+    private Set<GroupData> groups = new HashSet<>();
+
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
+
+    public void withGroup(Set<GroupData> groups) {
+        this.groups = groups;
+        //return groups;
+    }
 
     //@Transient
     transient private String allPhones;
@@ -78,6 +95,7 @@ public class ContactData {
         return "ContactData{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
                 '}';
     }
 

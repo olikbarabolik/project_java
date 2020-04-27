@@ -1,6 +1,8 @@
 package ru.stqa.pft.addressbook.model;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.sun.javafx.beans.IDProperty;
 import com.thoughtworks.xstream.XStream;
@@ -17,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
+import javax.persistence.ManyToMany;
 
 @Entity
 @Table (name = "group_list")
@@ -74,11 +77,20 @@ public class GroupData {
         return this;
     }
 
+    @ManyToMany(mappedBy = "groups")
+    private Set<ContactData> contacts = new HashSet<>();
+
+    public Set<ContactData> getContacts() {
+        return contacts;
+    }
+
     @Override
     public String toString() {
         return "GroupData{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", header='" + header + '\'' +
+                ", footer='" + footer + '\'' +
                 '}';
     }
 
@@ -88,11 +100,13 @@ public class GroupData {
         if (o == null || getClass() != o.getClass()) return false;
         GroupData groupData = (GroupData) o;
         return id == groupData.id &&
-                Objects.equals(name, groupData.name);
+                Objects.equals(name, groupData.name) &&
+                Objects.equals(header, groupData.header) &&
+                Objects.equals(footer, groupData.footer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, header, footer);
     }
 }
