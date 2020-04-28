@@ -77,11 +77,12 @@ public class GroupData {
         return this;
     }
 
+
     @ManyToMany(mappedBy = "groups")
     private Set<ContactData> contacts = new HashSet<>();
 
-    public Set<ContactData> getContacts() {
-        return contacts;
+    public Contacts getContacts() {
+        return new Contacts(contacts);
     }
 
     @Override

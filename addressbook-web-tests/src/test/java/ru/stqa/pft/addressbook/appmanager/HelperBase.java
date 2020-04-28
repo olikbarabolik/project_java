@@ -40,9 +40,9 @@ public class HelperBase {
         }
     }
 
-    public void chooseBySelect(By locator) {
+    public void chooseBySelect(By locator, int id) {
         Select listGroup = new Select(wd.findElement(locator));
-        listGroup.selectByVisibleText("test 0");
+        listGroup.selectByValue("" +id + "");
     }
 
     public void click(By locator){

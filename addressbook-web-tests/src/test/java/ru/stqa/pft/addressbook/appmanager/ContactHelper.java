@@ -13,6 +13,7 @@ import java.util.List;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
 import org.openqa.selenium.support.ui.Select;
@@ -92,9 +93,9 @@ public class ContactHelper extends HelperBase {
         submitContactModification();
     }
 
-    public void clickToGroup(){
+    public void clickToGroup(int id){
         click(By.xpath("//select[@name='group']"));
-        chooseBySelect(By.name("group"));
+        chooseBySelect(By.name("group"), id);
       }
 
 
