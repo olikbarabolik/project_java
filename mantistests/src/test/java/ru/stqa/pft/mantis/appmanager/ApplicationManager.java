@@ -21,20 +21,18 @@ public class ApplicationManager {
     private final Properties properties;
 
     private String browser;
-
-
     WebDriver wd;
+
+    private RegistrationHelper registrationHelper;
+    //private FtpHelper ftp;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
         properties = new Properties();
-
     }
 
     public void init() throws IOException {
-
         String target = System.getProperty("target","local");
-        //properties.load(new FileReader(new File(String.format("src/test/java/ru/stqa/pft/mantis/tests/resources/%s.properties", target))));
         properties.load(new FileReader(new File(String.format("src/test/java/resources/%s.properties", target))));
 
         //Проверка браузера
@@ -50,31 +48,51 @@ public class ApplicationManager {
         }
 
         wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
         wd.get(properties.getProperty("web.baseUrl"));
-
-
-
-
-
     }
-
 
     public void stop() {
-        wd.quit();
+        if (wd != null){
+            wd.quit();
+        }
     }
 
-    /*public RegistrationHelper registration(){
-        return new RegistrationHelper(this);
-    }*/
 
     public WebDriver getDriver(){
+        if (wd==null){
+            //Проверка браузера
+            if (browser.equals(BrowserType.FIREFOX)){
+                System.setProperty("webdriver.gecko.driver", "C://1806/2/geckodriver.exe");
+                wd = new FirefoxDriver();
+            } else if (browser.equals(BrowserType.CHROME)){
+                System.setProperty("webdriver.chrome.driver", "C://1806/2/3/chromedriver.exe");
+                wd = new ChromeDriver();
+            } else if (browser.equals(BrowserType.IE)){
+                System.setProperty("webdriver.ie.driver", "C://1806/2/3/IEDriverServer.exe");
+                wd = new InternetExplorerDriver();;
+            }
+        }
         return wd;
     }
 
+    public HttpSession newSession(){
+        return new HttpSession(this);
+    }
 
+    public String getProperty(String key){
+        return properties.getProperty(key);
+    }
 
-
-
+    public RegistrationHelper registration(){
+        if (registrationHelper==null){
+            registrationHelper = new RegistrationHelper(this);
+        }
+        return registrationHelper;
+    }
 }
+
+
+
+
+
 
