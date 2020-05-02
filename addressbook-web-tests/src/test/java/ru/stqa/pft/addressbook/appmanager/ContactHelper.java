@@ -8,7 +8,9 @@ import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -112,6 +114,16 @@ public class ContactHelper extends HelperBase {
         super.wd.findElement(By.cssSelector("input[value='" + id +"']")).click();
     }
 
+    public Set<Contacts> getContactGroup(Groups groupAllBefore, int id){
+        Set<Contacts> contactBefore1 = new HashSet<>();
+        for ( GroupData result : groupAllBefore) {
+            if (result.getId() == id){
+                Contacts contactBefore = result.getContacts();//список "до"
+                contactBefore1.add(result.getContacts());
+            }
+        }
+        return contactBefore1;
+    }
 
     public void gotoToContactPage() {
         click(By.linkText("add new"));

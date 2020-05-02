@@ -22,6 +22,23 @@ import static org.testng.Assert.assertEquals;
 
 public class AddGroupToContact extends TestBase{
 
+    //проверка наличия контакта
+    @BeforeMethod
+    public void ensurePreconditionsContact(){
+        if (app.db().contacts().size() == 0){
+            app.contact().create(new ContactData().withName("Test").withMiddlename("Testovich").withLastName("Testov").withAddress("My home"));
+        }
+    }
+
+    //проверка наличия группы
+    @BeforeMethod
+    public void ensurePreconditionsGroup(){
+        if (app.db().groups().size() == 0){
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withHeader("test1"));
+        }
+    }
+
     @Test
     public void testAddGroupToContact(){
 
@@ -36,6 +53,16 @@ public class AddGroupToContact extends TestBase{
             }
         }
 
+        //если все группы добавлены, делаем новый контакт с группой
+        if (freeGroup.size()==0){
+            app.contact().create(new ContactData().withName("Test41").withMiddlename("Testovich").withLastName("Testov").withAddress("My home"));
+            //Добавить
+            for ( GroupData result : groupAllBefore) {
+                freeGroup.add(result);
+
+            }
+        }
+
         Set<Contacts> contactBefore1 = new HashSet<>();
         Set<Contacts> contactAfter1 = new HashSet<>();
 
@@ -47,8 +74,8 @@ public class AddGroupToContact extends TestBase{
         //получаем список контактов у группы "до"
         for ( GroupData result : groupAllBefore) {
             if (result.getId() == id){
-                Contacts contactBefore = result.getContacts();//список "до"
-                contactBefore1.add(result.getContacts());
+                Contacts contactBefore = result.getContacts().withAdded(modifiedContact);//список "до"
+                contactBefore1.add(contactBefore);
             }
         }
 
@@ -63,8 +90,9 @@ public class AddGroupToContact extends TestBase{
         Groups groupContact =  modifiedContact.getGroups();
         for ( GroupData result1 : groupAllAfter) {
             if (result1.getId() == id){
-                Contacts contactAfter = result1.getContacts().withAdded(modifiedContact);//список "после"
-                contactAfter1.add(result1.getContacts());
+                //Contacts contactAfter = result1.getContacts().withAdded(modifiedContact);//список "после"
+                Contacts contactAfter = result1.getContacts();//список "после"
+                contactAfter1.add(contactAfter);
             }
         }
         //и сравнить полученные списки

@@ -26,6 +26,23 @@ public class DeleteGroupFromContact extends TestBase {
     //сравнить контакт
     //для модификации аналогично
 
+    //проверка наличия контакта
+    @BeforeMethod
+    public void ensurePreconditionsContact(){
+        if (app.db().contacts().size() == 0){
+            app.contact().create(new ContactData().withName("Test").withMiddlename("Testovich").withLastName("Testov").withAddress("My home"));
+        }
+    }
+
+    //проверка наличия группы
+    @BeforeMethod
+    public void ensurePreconditionsGroup(){
+        if (app.db().groups().size() == 0){
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withHeader("test1"));
+        }
+    }
+
     @Test
     public void testDeleteGroupToContact(){
 
@@ -39,6 +56,22 @@ public class DeleteGroupFromContact extends TestBase {
                 freeGroup.add(result);
             }
          }
+
+        if (freeGroup.size()==0){
+                //если все контакты удалены из всех групп, добавляем любой контакт в любую группу
+                Contacts before = app.db().contacts();
+                ContactData modifiedContact = before.iterator().next();
+                app.contact().selectContactById(modifiedContact.getId());
+                app.contact().submitAddTo();
+                app.contact().homePage();
+                groupAllBefore = app.db().groups();
+                for ( GroupData result : groupAllBefore) {
+                    if (result.getContacts().size()!=0){
+                        freeGroup.add(result);
+                    }
+                }
+        }
+
 
 
         GroupData deletedGroup = freeGroup.iterator().next();
@@ -54,7 +87,6 @@ public class DeleteGroupFromContact extends TestBase {
         for ( GroupData result : groupAllBefore) {
 
             if (result.getId() == id){
-                Contacts contactBefore = result.getContacts();//список "до"
                 contactBefore1.add(result.getContacts().without(deletedContact));
 
             }
@@ -68,7 +100,6 @@ public class DeleteGroupFromContact extends TestBase {
         //список контактов "после"
         for ( GroupData result1 : groupAllAfter) {
             if (result1.getId() == id){
-                Contacts contactAfter = result1.getContacts();//список "после"
                 contactAfter1.add(result1.getContacts());
             }
         }
