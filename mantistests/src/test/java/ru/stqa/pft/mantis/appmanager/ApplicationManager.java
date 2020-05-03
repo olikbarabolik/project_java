@@ -22,6 +22,7 @@ public class ApplicationManager {
 
     private String browser;
     WebDriver wd;
+    private MailHelper mailHelper;
 
     private RegistrationHelper registrationHelper;
     //private FtpHelper ftp;
@@ -34,9 +35,10 @@ public class ApplicationManager {
     public void init() throws IOException {
         String target = System.getProperty("target","local");
         properties.load(new FileReader(new File(String.format("src/test/java/resources/%s.properties", target))));
+        properties.load(new FileReader(new File("src/test/java/resources/config_inc.php")));
 
         //Проверка браузера
-        if (browser.equals(BrowserType.FIREFOX)){
+        /*if (browser.equals(BrowserType.FIREFOX)){
             System.setProperty("webdriver.gecko.driver", "C://1806/2/geckodriver.exe");
             wd = new FirefoxDriver();
         } else if (browser.equals(BrowserType.CHROME)){
@@ -48,7 +50,7 @@ public class ApplicationManager {
         }
 
         wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        wd.get(properties.getProperty("web.baseUrl"));
+        wd.get(properties.getProperty("web.baseUrl"));*/
     }
 
     public void stop() {
@@ -71,6 +73,9 @@ public class ApplicationManager {
                 System.setProperty("webdriver.ie.driver", "C://1806/2/3/IEDriverServer.exe");
                 wd = new InternetExplorerDriver();;
             }
+
+            wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            wd.get(properties.getProperty("web.baseUrl"));
         }
         return wd;
     }
@@ -88,6 +93,13 @@ public class ApplicationManager {
             registrationHelper = new RegistrationHelper(this);
         }
         return registrationHelper;
+    }
+
+    public MailHelper mail(){
+        if (mailHelper == null){
+            mailHelper = new MailHelper(this);
+        }
+        return mailHelper;
     }
 }
 
