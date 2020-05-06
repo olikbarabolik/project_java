@@ -7,14 +7,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
+
+
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 import ru.stqa.pft.mantis.model.MailMessage;
 
 import javax.mail.Message;
-//import javax.mail.MessageException;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+
+import ru.lanwen.verbalregex.VerbalExpression;
 
 public class MailHelper {
 
@@ -54,8 +57,12 @@ public class MailHelper {
         }
     }
 
-    public void start() {wiser.start(); }
-    public void stop() {wiser.stop(); }
+    public void start() {
+            wiser.start();
+    }
+    public void stop() {
+        wiser.stop();
+    }
 
 
 

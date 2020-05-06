@@ -23,9 +23,10 @@ public class ApplicationManager {
     private String browser;
     WebDriver wd;
     private MailHelper mailHelper;
+    private ChangePasswordHelper changePasswordHelper;
 
     private RegistrationHelper registrationHelper;
-    //private FtpHelper ftp;
+    private FtpHelper ftp;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -95,12 +96,28 @@ public class ApplicationManager {
         return registrationHelper;
     }
 
+    public FtpHelper ftp(){
+        if (ftp==null){
+            ftp = new FtpHelper(this);
+        }
+        return ftp;
+    }
+
     public MailHelper mail(){
         if (mailHelper == null){
             mailHelper = new MailHelper(this);
         }
         return mailHelper;
     }
+
+    public ChangePasswordHelper getChangePasswordHelper(){
+        if (changePasswordHelper == null){
+            changePasswordHelper = new ChangePasswordHelper(this);
+        }
+        return changePasswordHelper;
+    }
+
+
 }
 
 
