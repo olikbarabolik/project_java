@@ -15,6 +15,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.ie.*;
 
+import org.testng.SkipException;
+
 import java.io.File;
 
 public class TestBase {
@@ -35,6 +37,17 @@ public class TestBase {
         app.ftp().restore("config/config_inc.php.bak", "config/config_inc.php");
         app.mail().stop();
         app.stop();
+    }
+
+    boolean isIssueOpen(int issueId){
+        return true;
+    }
+
+
+    public void skipIfNotFixed(int issueId) {
+        if (isIssueOpen(issueId)) {
+            throw new SkipException("Ignored because of issue " + issueId);
+        }
     }
 
 

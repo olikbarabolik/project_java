@@ -28,6 +28,8 @@ public class ApplicationManager {
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
 
+    private SoapHelper soapHelper;
+
     public ApplicationManager(String browser) {
         this.browser = browser;
         properties = new Properties();
@@ -38,20 +40,6 @@ public class ApplicationManager {
         properties.load(new FileReader(new File(String.format("src/test/java/resources/%s.properties", target))));
         properties.load(new FileReader(new File("src/test/java/resources/config_inc.php")));
 
-        //Проверка браузера
-        /*if (browser.equals(BrowserType.FIREFOX)){
-            System.setProperty("webdriver.gecko.driver", "C://1806/2/geckodriver.exe");
-            wd = new FirefoxDriver();
-        } else if (browser.equals(BrowserType.CHROME)){
-            System.setProperty("webdriver.chrome.driver", "C://1806/2/3/chromedriver.exe");
-            wd = new ChromeDriver();
-        } else if (browser.equals(BrowserType.IE)){
-            System.setProperty("webdriver.ie.driver", "C://1806/2/3/IEDriverServer.exe");
-            wd = new InternetExplorerDriver();;
-        }
-
-        wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        wd.get(properties.getProperty("web.baseUrl"));*/
     }
 
     public void stop() {
@@ -116,6 +104,14 @@ public class ApplicationManager {
         }
         return changePasswordHelper;
     }
+
+    public SoapHelper soap(){
+        if (soapHelper==null){
+            soapHelper = new SoapHelper(this);
+        }
+        return soapHelper;
+    }
+
 
 
 }
