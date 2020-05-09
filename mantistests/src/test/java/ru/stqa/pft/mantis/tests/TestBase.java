@@ -16,8 +16,12 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.ie.*;
 
 import org.testng.SkipException;
+import ru.stqa.pft.mantis.model.Issue;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.rmi.RemoteException;
+import javax.xml.rpc.ServiceException;
 
 public class TestBase {
 
@@ -39,12 +43,18 @@ public class TestBase {
         app.stop();
     }
 
-    boolean isIssueOpen(int issueId){
-        return true;
+    boolean isIssueOpen(int issueId) throws MalformedURLException, ServiceException, RemoteException{
+        Issue issue = app.soap().getIssueById(issueId);
+        if ((issue.getStatus().equals("resolved")) || (issue.getStatus().equals("closed")) ||
+                (issue.getResolution().equals("fixed"))) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 
-    public void skipIfNotFixed(int issueId) {
+    public void skipIfNotFixed(int issueId) throws MalformedURLException, ServiceException, RemoteException{
         if (isIssueOpen(issueId)) {
             throw new SkipException("Ignored because of issue " + issueId);
         }
