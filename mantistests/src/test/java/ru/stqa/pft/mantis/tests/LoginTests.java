@@ -15,8 +15,8 @@ public class LoginTests extends TestBase {
     @Test
     public void testLogin() throws IOException,ServiceException {
         try {
-            skipIfNotFixed(1);
-            //skipIfNotFixedRest(1);
+            //skipIfNotFixed(1);
+            skipIfNotFixedRest(1);
         } catch (SkipException e) {
             e.printStackTrace();
         }
