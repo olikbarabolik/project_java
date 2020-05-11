@@ -48,9 +48,9 @@ public class TestBase {
         Issue issue = app.soap().getIssueById(issueId);
         if ((issue.getStatus().equals("resolved")) || (issue.getStatus().equals("closed")) ||
                 (issue.getResolution().equals("fixed"))) {
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 
@@ -66,8 +66,9 @@ public class TestBase {
         if ((issueStatus.equals("Resolved")) || (issueStatus.equals("Closed")) ||
                 (issueStatus.equals("Fixed"))) {
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
     public void skipIfNotFixedRest(int issueId) throws IOException, ServiceException {
