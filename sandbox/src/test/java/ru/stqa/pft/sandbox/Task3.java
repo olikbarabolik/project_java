@@ -14,12 +14,12 @@ public class Task3 {
         Assert.assertEquals(p1.distance(p2), 5.656854249492381);
     }
 
-    @Test
+    /*@Test
     public void failTest(){
         Point p1 = new Point(3,5);
         Point p2 = new Point(7,9);
         System.out.println("!!!! Running test 2");
         //Зафейленный тест
         Assert.assertEquals(p1.distance(p2), 2);
-    }
+    }*/
 }
