@@ -43,7 +43,7 @@ public class ApplicationManager {
 
     public void init() throws IOException {
 
-        String target = System.getProperty("target","remote");
+        String target = System.getProperty("target","local");
         properties.load(new FileReader(new File(String.format("src/test/java/ru/stqa/pft/addressbook/tests/resources/%s.properties", target))));
 
         dbHelper = new DbHelper();
@@ -62,9 +62,7 @@ public class ApplicationManager {
             }
         }  else{
             DesiredCapabilities capabilites = new DesiredCapabilities();
-            System.setProperty("webdriver.chrome.driver", "C://1806/2/3/chromedriver.exe");
             capabilites.setBrowserName(browser);
-
             capabilites.setPlatform(Platform.fromString(System.getProperty("platform","win7")));
             wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilites);
         }
