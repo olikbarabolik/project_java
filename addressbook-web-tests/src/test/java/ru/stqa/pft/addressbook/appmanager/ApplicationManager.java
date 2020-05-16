@@ -9,6 +9,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.*;
@@ -17,11 +18,11 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.ie.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-//org.openqa.selenium.remote.DesiredCapabilities
+
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-
+import org.openqa.selenium.Capabilities;
 
 public class ApplicationManager {
     private final Properties properties;
@@ -62,6 +63,7 @@ public class ApplicationManager {
         }  else{
             DesiredCapabilities capabilites = new DesiredCapabilities();
             capabilites.setBrowserName(browser);
+            capabilites.setPlatform(Platform.fromString(System.getProperty("platform","win7")));
             wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilites);
         }
 
