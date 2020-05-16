@@ -49,6 +49,7 @@ public class ApplicationManager {
         dbHelper = new DbHelper();
         //Проверка браузера
         if ("".equals(properties.getProperty("selenium.server"))) {
+            System.out.println("!!!!!!properties " + properties.getProperty("selenium.server") );
             if (browser.equals(BrowserType.FIREFOX)) {
                 System.setProperty("webdriver.gecko.driver", "C://1806/2/geckodriver.exe");
                 wd = new FirefoxDriver();
@@ -66,7 +67,7 @@ public class ApplicationManager {
             capabilites.setPlatform(Platform.fromString(System.getProperty("platform","win7")));
             System.out.println("!!!!!!properties " + properties.getProperty("selenium.server") );
             wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilites);
-            
+
         }
 
         wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
