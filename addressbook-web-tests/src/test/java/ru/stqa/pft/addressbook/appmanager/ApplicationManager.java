@@ -45,7 +45,7 @@ public class ApplicationManager {
 
         String target = System.getProperty("target","local");
         properties.load(new FileReader(new File(String.format("src/test/java/ru/stqa/pft/addressbook/tests/resources/%s.properties", target))));
-
+        System.setProperty("webdriver.chrome.driver", "C://1806/2/chromedriver.exe");
         dbHelper = new DbHelper();
         //Проверка браузера
         if ("".equals(properties.getProperty("selenium.server"))) {
@@ -53,7 +53,7 @@ public class ApplicationManager {
                 System.setProperty("webdriver.gecko.driver", "C://1806/2/geckodriver.exe");
                 wd = new FirefoxDriver();
             } else if (browser.equals(BrowserType.CHROME)) {
-                System.setProperty("webdriver.chrome.driver", "C://1806/2chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "C://1806/2/chromedriver.exe");
                 wd = new ChromeDriver();
             } else if (browser.equals(BrowserType.IE)) {
                 System.setProperty("webdriver.ie.driver", "C://1806/2/IEDriverServer.exe");
