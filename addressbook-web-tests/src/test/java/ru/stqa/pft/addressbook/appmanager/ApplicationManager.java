@@ -53,18 +53,18 @@ public class ApplicationManager {
                 System.setProperty("webdriver.gecko.driver", "C://1806/2/geckodriver.exe");
                 wd = new FirefoxDriver();
             } else if (browser.equals(BrowserType.CHROME)) {
-                System.setProperty("webdriver.chrome.driver", "C://1806/2/3/chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "C://1806/2chromedriver.exe");
                 wd = new ChromeDriver();
             } else if (browser.equals(BrowserType.IE)) {
-                System.setProperty("webdriver.ie.driver", "C://1806/2/3/IEDriverServer.exe");
+                System.setProperty("webdriver.ie.driver", "C://1806/2/IEDriverServer.exe");
                 wd = new InternetExplorerDriver();
                 ;
             }
         }  else{
             DesiredCapabilities capabilites = new DesiredCapabilities();
             capabilites.setBrowserName(browser);
-            capabilites.setPlatform(Platform.fromString(System.getProperty("platform","win7")));
-            //capabilites.setPlatform(Platform.fromString("win7"));
+            //capabilites.setPlatform(Platform.fromString(System.getProperty("platform","win7")));
+            capabilites.setPlatform(Platform.VISTA);//Platform.WINDOWS
              wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilites);
 
         }
