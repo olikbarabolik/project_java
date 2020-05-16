@@ -65,7 +65,7 @@ public class ApplicationManager {
             capabilites.setBrowserName(browser);
             //capabilites.setPlatform(Platform.fromString(System.getProperty("platform","win7")));
             capabilites.setPlatform(Platform.WINDOWS);//Platform.WINDOWS
-             wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilites);
+            wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilites);
 
         }
 
@@ -103,7 +103,9 @@ public class ApplicationManager {
         return dbHelper;
     }
 
-
+    public byte[] takeScreenshot(){
+        return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
+    }
 
 
 }
